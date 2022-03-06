@@ -6,6 +6,9 @@
 #Packages
 library(ggplot2)
 
+#pitch_markings must follow a ggplot object
+#e.g. ggplot() + pitch_markings()
+
 pitch_markings<- function(grass_col="#538032",
                       line_col="#ffffff",
                       background_col="#538032",
@@ -31,38 +34,39 @@ pitch_markings<- function(grass_col="#538032",
   Dright<- Dright[which(Dright$x <= (1 - 0.17) * pitchlength),]
   
   #Plot
-  p<- ggplot() +
+  p<- list(
     #Center circle
-    geom_path(data = center_circle, aes(x = x, y = y), colour = line_col)+
+    geom_path(data = center_circle, aes(x = x, y = y), colour = line_col),
     #Middle spot
-    geom_point(aes(x = 0.5 * pitchlength, y = 0.5 * pitchwidth), colour = line_col)+
+    geom_point(aes(x = 0.5 * pitchlength, y = 0.5 * pitchwidth), colour = line_col),
     #Halfway line
     geom_segment(aes(x = 0.5*pitchlength, xend = 0.5*pitchlength, 
-                     y = 0, yend = pitchwidth),colour = line_col) +
+                     y = 0, yend = pitchwidth),colour = line_col) ,
     #RHS penalty box
     geom_rect(aes(xmin = 0.83 * pitchlength, xmax = pitchlength,
                   ymin = 0.211 * pitchwidth, ymax = 0.799 * pitchwidth),
-              colour = line_col, fill = grass_col, alpha = 0.2) +
+              colour = line_col, fill = grass_col, alpha = 0) ,
     #RHS penalty spot
-    geom_point(aes(x=0.885 * pitchlength, y = 0.5 * pitchwidth), colour = line_col)+
+    geom_point(aes(x=0.885 * pitchlength, y = 0.5 * pitchwidth), colour = line_col),
     #LHS penalty box
     geom_rect(aes(xmin = 0, xmax = 0.17 * pitchlength,
                   ymin = 0.211 * pitchwidth, ymax = 0.799 * pitchwidth),
-              colour = line_col, fill = grass_col, alpha = 0.2) +
+              colour = line_col, fill = grass_col, alpha = 0) ,
     #LHS penalty spot
-    geom_point(aes(x=0.115 * pitchlength, y = 0.5 * pitchwidth), colour = line_col)+
+    geom_point(aes(x=0.115 * pitchlength, y = 0.5 * pitchwidth), colour = line_col),
     #RHS 6-yard box
     geom_rect(aes(xmin = (1 - 0.058) * pitchlength, xmax = pitchlength,
                   ymin = 0.368 * pitchwidth, ymax = (1 - 0.368) * pitchwidth),
-              colour = line_col, fill = grass_col, alpha = 0.2) +
+              colour = line_col, fill = grass_col, alpha = 0) ,
     #LHS 6-yard box
     geom_rect(aes(xmin = 0, xmax = 0.058 * pitchlength,
                   ymin = 0.368 * pitchwidth, ymax = (1 - 0.368) * pitchwidth),
-              colour = line_col, fill = grass_col, alpha = 0.2) +
+              colour = line_col, fill = grass_col, alpha = 0) ,
     #Left D
-    geom_path(data = Dleft, aes(x = x, y = y), colour = line_col) +
+    geom_path(data = Dleft, aes(x = x, y = y), colour = line_col) ,
     #Right D
     geom_path(data = Dright, aes(x = x, y = y), colour = line_col)
+  )
   
   return(p)
   
