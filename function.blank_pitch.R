@@ -1,19 +1,23 @@
 ###################################################
 ###       Function to create a blank pitch      ###
 ###################################################
-  
+
+#Packages
+library(ggplot2)
+
 blank_pitch<- function(grass_col="#538032",
                        line_col="#ffffff",
                        background_col="#538032",
                        size=12,
                        pitchlength=120,
                        pitchwidth=80) {
-  pitch<- list(
-    geom_rect(xmin = 0, xmax = pitchlength,
-              ymin = 0, ymax = pitchwidth,
-              colour = line_col, fill = grass_col),
-    xlim(c(-10,pitchlength+10)),
-    ylim(c(-10,pitchwidth+10)),
+  p<- ggplot() +
+    #Blank pitch  
+    geom_rect(aes(xmin = 0, xmax = pitchlength,
+                  ymin = 0, ymax = pitchwidth),
+              colour = line_col, fill = grass_col)+
+    xlim(c(-10,pitchlength+10))+
+    ylim(c(-10,pitchwidth+10))+
     theme(
       axis.text=element_blank(),
       axis.ticks.length=unit(0, "lines"), 
@@ -29,7 +33,6 @@ blank_pitch<- function(grass_col="#538032",
       plot.title=element_text(size=size*1.2), 
       strip.text.y=element_text(colour=background_col,size=size,angle=270),
       strip.text.x=element_text(size=size*1))
-  )
   
-  return(pitch)
+  return(p)
 }
