@@ -21,6 +21,8 @@ pitch_full<- function(grass_col="#538032",
     return(data.frame(x = xx, y = yy))
   }
   
+  center_circle<- circleFun(center = c(0.5 * pitchlength, 0.5 * pitchwidth), diameter=30)
+  
   Dleft<- circleFun(center = c(0.1 * pitchlength, 0.5 * pitchwidth), diameter = 22)
   Dleft<- Dleft[which(Dleft$x >= 0.17 * pitchlength),]
   
@@ -50,11 +52,8 @@ pitch_full<- function(grass_col="#538032",
         plot.title=element_text(size=size*1.2), 
         strip.text.y=element_text(colour=background_col,size=size,angle=270),
         strip.text.x=element_text(size=size*1))+
-      #Centre circle
-      annotation_custom(grob = grid::circleGrob(r = grid::unit(1,  "npc"),
-                                                gp = grid::gpar(col = line_col, fill = grass_col, lwd = 2)),
-                        xmin = 0.43 * pitchlength, xmax = 0.57 * pitchlength,
-                        ymin = 0.43 * pitchwidth, ymax = 0.57 * pitchwidth)+
+      #Center circle
+      geom_path(data = center_circle, aes(x = x, y = y), colour = line_col)+
       #Middle spot
       geom_point(aes(x = 0.5 * pitchlength, y = 0.5 * pitchwidth), colour = line_col)+
       #Halfway line
