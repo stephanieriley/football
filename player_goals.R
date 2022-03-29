@@ -31,7 +31,7 @@ for(i in 1:nrow(matchgoal)) {
 }
 
 #Filter for player and plot
-player<- "Leah Williamson"
+player<- "Vivianne Miedema"
 dat<- filter(matchgoal, player.name == player)
 blank_pitch() +
   xlim(c(90,120)) +
