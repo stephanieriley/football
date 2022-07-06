@@ -62,12 +62,12 @@ ggplot(dat_mut, aes(x=Group, y=Worldrank_pos)) +
   labs(title = "FIFA world <span style ='color:#ffffff'>ranking</span> 
        of countries in the<br>UEFA Women's  EURO 2022",
        caption = "World ranking correct as of June 17 2022") +
-  geom_curve(aes(x = 3.2, y = 10, xend = 3.2, yend = 5.3),
+  geom_curve(aes(x = 3.2, y = 8.5, xend = 3.2, yend = 5.3),
              arrow = arrow(length = unit(0.03, "npc")),
              col=subcol,
              curvature = 0.3,
              size = 1) +
-  annotate(geom="text", x=3, y=12.5, label = "2017 champions\nNetherlands", col=subcol, size = 6) +
+  annotate(geom="text", x=3, y=11, label = "2017 champions\nThe Netherlands", col=subcol, size = 6) +
   geom_curve(aes(x = 0, y = 13, xend = 0.8, yend = 8),
              arrow = arrow(length = unit(0.03, "npc")),
              col=subcol,
